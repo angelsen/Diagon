@@ -21,8 +21,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 #-------------------------------------------------------------------------------
 
 FetchContent_Declare(json
-  GIT_REPOSITORY https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent
-  GIT_TAG v3.9.1
+  GIT_REPOSITORY https://github.com/nlohmann/json.git
+  GIT_TAG v3.11.3
   GIT_PROGRESS TRUE
   EXCLUDE_FROM_ALL TRUE
 )
@@ -41,10 +41,13 @@ FetchContent_Declare(antlr
   EXCLUDE_FROM_ALL TRUE
 )
 
+set(ANTLR_BUILD_TESTS OFF CACHE BOOL "")
+set(ANTLR_BUILD_CPP_TESTS OFF CACHE BOOL "")
 FetchContent_GetProperties(antlr)
 if(NOT antlr_POPULATED)
   FetchContent_Populate(antlr)
   SET(WITH_LIBCXX OFF CACHE BOOL "")
+  SET(ANTLR_BUILD_CPP_TESTS OFF CACHE BOOL "")
   SET(CMAKE_HOME_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
   add_subdirectory(
     ${antlr_SOURCE_DIR}/runtime/Cpp
